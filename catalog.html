@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Catalog</title>
+    <link rel="stylesheet" href="catalog.css" />
+
+    <!--GOOGLE FONTS-->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,100..900;1,9..144,100..900&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <p id="top"></p>
+    <div>
+      <nav>
+        <img
+          src="images/logo.png"
+          class="logo"
+          alt="PrismWeave"
+          height="80px"
+          width="80px"
+        />
+        <div>
+          <input
+            type="search"
+            id="q"
+            class="search"
+            placeholder="Search..."
+            aria-label="Search products"
+          />
+          <button
+            type="button"
+            class="gobtn"
+            onclick="
+              ui.q = $('#q').value;
+              render();
+            "
+          >
+            Go
+          </button>
+        </div>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="#products">Products</a></li>
+          <li>
+            <a href="#">Categories</a>
+            <ul class="dropdown-menu">
+              <a href="#products">All Categories</a>
+            </ul>
+          </li>
+          <li><a href="#aboutus">About Us</a></li>
+        </ul>
+      </nav>
+    </div>
+
+    <div class="content" id="products">
+      <div class="sortbar">
+        <label for="so">Sort by</label>
+        <select id="so">
+          <option value="az">Alphabetical (A–Z)</option>
+          <option value="lo">Price: low to high</option>
+          <option value="hi">Price: high to low</option>
+          <option value="av">In stock first</option>
+        </select>
+      </div>
+      <div id="catalog"></div>
+    </div>
+    <div class="random">
+      <!--RANDOM SPACE FOR FOOTER-->
+      <p></p>
+    </div>
+
+    <footer>
+      <div class="footer-content">
+        <div class="foot-panel">
+          <div class="about">
+            <p id="aboutus"></p>
+            <img
+              src="images/what.png"
+              class="prism"
+              alt="PrismWeave"
+              height="130"
+            />
+
+            <div>
+              <p class="text">
+                PrismWeave is a fabric, textile, and sewing supplies business
+                that offers a variety of materials for sewing, crafting, and
+                other creative projects. Our website serves as an online product
+                catalog where customers can explore our available fabrics,
+                needles, threads, and other sewing essentials before visiting
+                our store. While the website does not offer online purchasing or
+                checkout, it allows customers to discover different products and
+                choose the materials that best suit their needs.
+              </p>
+              <p class="text">
+                We believe that sewing is a creative and enjoyable activity for
+                people of all ages, including beginners and children. Through
+                our wide selection of sewing materials, we aim to inspire
+                creativity, encourage people to learn new skills, and bring joy
+                to those who enjoy sewing as a hobby.
+              </p>
+            </div>
+          </div>
+
+          <div class="rightcol">
+            <div class="contact">
+              <h2 id="contactus" class="contactus">Contact Us</h2>
+              <div class="email">
+                <p>Phone: +639123456789</p>
+                <p>Email: prismweave@gmail.com</p>
+                <p>Store: 25 Blueberry St., Marikina City</p>
+                <p>Hours: Mon-Sat 11:00 AM-8:00</p>
+              </div>
+            </div>
+
+            <div class="feedback">
+              <h2 class="contactus">Share your feedback</h2>
+              <input id="fn" placeholder="Name" aria-label="Name" />
+              <textarea
+                id="fb"
+                placeholder="Feedback text"
+                aria-label="Feedback"
+                rows="3"
+              ></textarea>
+              <button type="button" class="btn" onclick="sendFb()">
+                Submit
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="ticker"><div id="mq"></div></div>
+
+        <div class="back">
+          <h3><a href="#top" class="to-top">Back to Top</a></h3>
+          <hr />
+        </div>
+
+        <div class="copy-container">
+          <span class="copyright">@ 2026</span>
+          <img
+            src="images/logo_black.png"
+            class=""
+            alt="PrismWeave"
+            height="30"
+          />
+        </div>
+      </div>
+    </footer>
+
+    <div class="veil" id="veil" onclick="closeAll()"></div>
+    <aside class="drawer" id="dr" aria-label="Product details"></aside>
+    <div class="modal" id="mi">
+      <h3>Ask the seller</h3>
+      <div id="mit" style="color: #6b6580; font-size: 0.9rem"></div>
+      <label for="in1">Full name</label><input id="in1" /><label for="in2"
+        >Email</label
+      ><input id="in2" type="email" /><label for="in3">Phone number</label
+      ><input id="in3" type="tel" /><label for="in4">Message or concern</label
+      ><textarea id="in4" rows="4"></textarea>
+      <div class="acts">
+        <button class="btn ghost" onclick="closeInq()">Cancel</button
+        ><button class="btn" onclick="sendInq()">Send message</button>
+      </div>
+    </div>
+    <div id="toast" role="status"></div>
+    <script src="data.js"></script>
+    <script src="catalog.js"></script>
+  </body>
+</html>

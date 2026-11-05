@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="admin.css" />
+  </head>
+  <body>
+    <div class="dashboard-container hide" id="adm">
+      <header class="dashboard-header">
+        <div>
+          <span class="auth-tag">AUTHORIZED STAFF</span>
+          <h1>Hi, Admin <span id="an"></span></h1>
+          <p>Manage products, inventory, orders, and sales records.</p>
+        </div>
+        <div class="hactions">
+          <button class="btn ghost" onclick="openMsgs()">
+            Messages <b id="mc">0</b>
+          </button>
+          <button class="btn" onclick="openPos()">Create In-Store Order</button>
+          <button class="btn ghost" onclick="logout()">Log out</button>
+        </div>
+      </header>
+
+      <div class="stats-grid" id="stats"></div>
+
+      <div class="main-content">
+        <section class="content-block inventory-section">
+          <div class="block-header">
+            <h2>Inventory</h2>
+            <span
+              ><select id="isort" onchange="dash()" aria-label="Sort inventory">
+                <option value="az">Sort: Name A–Z</option>
+                <option value="lo">Price: low to high</option>
+                <option value="hi">Price: high to low</option>
+                <option value="stk">Stock: low to high</option>
+                <option value="stkh">Stock: high to low</option>
+              </select>
+              <button class="btn-add" onclick="editP()">
+                + Add product
+              </button></span
+            >
+          </div>
+          <div class="table-container">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Product</th>
+                  <th>Category</th>
+                  <th>Price</th>
+                  <th>Stock</th>
+                  <th>Status</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="inv"></tbody>
+            </table>
+          </div>
+        </section>
+
+        <section class="content-block orders-section">
+          <div class="block-header">
+            <h2>Recent orders</h2>
+          </div>
+          <div id="rcs"></div>
+        </section>
+      </div>
+    </div>
+    <div id="pos">
+      <div class="pg">
+        <div class="row">
+          <h3 style="margin: 0">In-store order</h3>
+          <input
+            id="pq"
+            type="search"
+            placeholder="Search items…"
+            style="
+              padding: 0.5em 1em;
+              border-radius: 999px;
+              border: 1px solid #ccc;
+            "
+          />
+        </div>
+        <div class="grid" id="pg"></div>
+      </div>
+      <div class="cart">
+        <h3 style="margin-top: 0">Current cart</h3>
+        <div id="ci" style="flex: 1"></div>
+        <h3 id="ct">Total: 0.00</h3>
+        <button class="btn" onclick="checkout()">Complete Purchase</button
+        ><button
+          class="btn ghost"
+          style="margin-top: 0.5rem"
+          onclick="closePos()"
+        >
+          Cancel
+        </button>
+      </div>
+    </div>
+
+    <div class="veil" id="veil" onclick="closeAll()"></div>
+    <div class="modal" id="ml">
+      <h3>Staff sign in</h3>
+      <label for="lu">Username</label><input id="lu" value="admin" /><label
+        for="lp"
+        >Password</label
+      ><input id="lp" type="password" value="admin123" />
+      <div id="le" style="color: #e11d48; font-size: 0.85rem"></div>
+      <div class="acts">
+        <button class="btn ghost" onclick="location.href = 'index.html'">
+          Back to store</button
+        ><button class="btn" onclick="login()">Sign in</button>
+      </div>
+    </div>
+    <div class="modal" id="mp">
+      <h3 id="mpt">Add New Product</h3>
+      <input type="hidden" id="pid" /> <label for="pn">Title</label
+      ><input id="pn" /><label for="pc">Category</label
+      ><select id="pc"></select
+      ><label for="pp">Price (₱)</label
+      ><input id="pp" type="number" min="0" step="0.01" /><label for="ps"
+        >Stock quantity</label
+      ><input id="ps" type="number" min="0" /><label for="pd">Description</label
+      ><textarea id="pd" rows="3"></textarea
+      ><label for="pf">Product image</label
+      ><input id="pf" type="file" accept="image/*" /><img
+        id="pv"
+        alt="Image preview"
+        style="
+          display: none;
+          width: 90px;
+          height: 90px;
+          object-fit: cover;
+          border-radius: 12px;
+          margin-top: 0.5rem;
+        "
+      />
+      <div class="acts">
+        <button
+          class="btn red hide"
+          id="pdel"
+          style="margin-right: auto"
+          onclick="askDel()"
+        >
+          Delete product</button
+        ><button class="btn ghost" onclick="closeAll()">Cancel</button
+        ><button class="btn" onclick="saveP()">Save product</button>
+      </div>
+    </div>
+    <div class="modal" id="mm" style="width: min(680px, 94vw)">
+      <h3>Customer messages</h3>
+      <div id="mlist"></div>
+      <div class="acts">
+        <button class="btn ghost" onclick="closeAll()">Close</button>
+      </div>
+    </div>
+    <div class="modal" id="md">
+      <h3>Delete this product?</h3>
+      <p id="mdt" style="margin: 0"></p>
+      <div class="acts">
+        <button class="btn ghost" onclick="closeAll()">Keep product</button
+        ><button class="btn red" onclick="doDel()">Yes, delete</button>
+      </div>
+    </div>
+    <div id="toast" role="status"></div>
+    <script src="seed.js"></script>
+    <script src="data.js"></script>
+    <script src="admin.js"></script>
+  </body>
+</html>
